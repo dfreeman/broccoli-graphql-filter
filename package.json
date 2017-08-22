@@ -1,9 +1,10 @@
 {
   "name": "broccoli-graphql-filter",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Converts graphql files to an es6 const export",
   "main": "index.js",
   "author": "Chris Santero <chris@simply360.org>",
+  "repository": "https://github.com/csantero/broccoli-graphql-filter",
   "license": "MIT",
   "dependencies": {
     "broccoli": "^1.1.3",

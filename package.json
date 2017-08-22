@@ -1,0 +1,27 @@
+{
+  "name": "broccoli-graphql-filter",
+  "version": "0.0.1",
+  "description": "Converts graphql files to an es6 const export",
+  "main": "index.js",
+  "author": "Chris Santero <chris@simply360.org>",
+  "license": "MIT",
+  "dependencies": {
+    "broccoli": "^1.1.3",
+    "broccoli-filter": "^1.2.4"
+  },
+  "keywords": [
+    "broccoli-plugin",
+    "graphql",
+    "preprocessor",
+    "compile"
+  ],
+  "devDependencies": {
+    "broccoli-cli": "^1.0.0",
+    "mocha": "^3.5.0",
+    "rimraf": "^2.6.1"
+  },
+  "scripts": {
+    "pretest": "broccoli build test/temp",
+    "test": "mocha test.js"
+  }
+}

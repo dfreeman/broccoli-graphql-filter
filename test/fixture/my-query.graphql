@@ -1,0 +1,6 @@
+query myQuery {
+  foo {
+    bar
+    baz(id: "1234")
+  }
+}

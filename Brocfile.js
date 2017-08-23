@@ -1,6 +1,6 @@
 'use strict';
-var GraphqlFilter = require('./index');
+var GraphQLFilter = require('./index');
 
-var node = new GraphqlFilter('./test/fixture/', 'Test');
+var node = new GraphQLFilter('./test/fixture/', 'Test');
 
 module.exports = node;

@@ -15,5 +15,10 @@ describe('File creation', function() {
       fs.readFileSync('test/expected/my-query.js', 'utf8'),
       fs.readFileSync('test/temp/my-query.js', 'utf8')
     );
+
+    assert.equal(
+      fs.readFileSync('test/expected/my-fragment.js', 'utf8'),
+      fs.readFileSync('test/temp/my-fragment.js', 'utf8')
+    );
   });
 });

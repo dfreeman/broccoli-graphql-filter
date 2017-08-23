@@ -32,6 +32,7 @@ fragment MyFragment on Foo {
 the filter will output the following JS:
 
 #### my-query.js
+```js
 const doc = {
   "kind": "Document",
   "definitions": [
@@ -128,3 +129,6 @@ const doc = {
 };
 export default doc;
 ```
+
+## Acknowledgements
+The filter code was extracted from https://github.com/bgentry/ember-apollo-client and was originally contributed by https://github.com/dfreeman.

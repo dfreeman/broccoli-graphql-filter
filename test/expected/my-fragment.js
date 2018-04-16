@@ -20,14 +20,12 @@ const doc = {
         "selections": [
           {
             "kind": "Field",
-            "alias": null,
             "name": {
               "kind": "Name",
               "value": "hello"
             },
             "arguments": [],
-            "directives": [],
-            "selectionSet": null
+            "directives": []
           }
         ]
       }

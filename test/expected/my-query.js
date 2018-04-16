@@ -15,7 +15,6 @@ const doc = {
         "selections": [
           {
             "kind": "Field",
-            "alias": null,
             "name": {
               "kind": "Name",
               "value": "foo"

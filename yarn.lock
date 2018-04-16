@@ -93,20 +93,6 @@ broccoli-cli@^1.0.0:
   dependencies:
     resolve "~0.6.1"
 
-broccoli-filter@^1.2.4:
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/broccoli-filter/-/broccoli-filter-1.2.4.tgz#409afb94b9a3a6da9fac8134e91e205f40cc7330"
-  dependencies:
-    broccoli-kitchen-sink-helpers "^0.3.1"
-    broccoli-plugin "^1.0.0"
-    copy-dereference "^1.0.0"
-    debug "^2.2.0"
-    mkdirp "^0.5.1"
-    promise-map-series "^0.2.1"
-    rsvp "^3.0.18"
-    symlink-or-copy "^1.0.1"
-    walk-sync "^0.3.1"
-
 broccoli-kitchen-sink-helpers@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/broccoli-kitchen-sink-helpers/-/broccoli-kitchen-sink-helpers-0.3.1.tgz#77c7c18194b9664163ec4fcee2793444926e0c06"

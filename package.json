@@ -1,6 +1,6 @@
 {
   "name": "broccoli-graphql-filter",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Converts graphql files to an AST representation",
   "main": "index.js",
   "author": "Chris Santero <chris@simply360.org>",

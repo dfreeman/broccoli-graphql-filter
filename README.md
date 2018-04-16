@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/csantero/broccoli-graphql-filter.svg?branch=master)](https://travis-ci.org/csantero/broccoli-graphql-filter)
+
 # broccoli-graphql-filter
 A [broccoli](https://github.com/joliss/broccoli) filter that converts graphql files to an es6 module exporting an AST representation of the query.
 

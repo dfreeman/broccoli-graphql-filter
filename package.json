@@ -7,9 +7,9 @@
   "repository": "https://github.com/csantero/broccoli-graphql-filter",
   "license": "MIT",
   "dependencies": {
-    "broccoli-persistent-filter": "^1.4.3",
-    "graphql": "^0.13.2",
-    "graphql-tag": "^2.8.0"
+    "broccoli-persistent-filter": "^2.1.1",
+    "graphql": "^14.0.2",
+    "graphql-tag": "^2.10.0"
   },
   "keywords": [
     "broccoli-plugin",
@@ -18,9 +18,9 @@
     "compile"
   ],
   "devDependencies": {
-    "broccoli": "^1.1.4",
+    "broccoli": "^2.0.1",
     "broccoli-cli": "^1.0.0",
-    "mocha": "^5.1.0",
+    "mocha": "^5.2.0",
     "rimraf": "^2.6.2"
   },
   "scripts": {

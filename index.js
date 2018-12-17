@@ -6,10 +6,19 @@ const gql = require('graphql-tag');
 gql.disableFragmentWarnings();
 
 module.exports = class GraphQLFilter extends Filter {
-  constructor(inputNode, options) {
+  constructor(inputNode, { keepExtension = false, ...options }) {
     super(inputNode, options);
-    this.extensions = ['graphql'];
-    this.targetExtension = 'js';
+    this.targetExtension = keepExtension ? null : 'js';
+    this.extensions = ['graphql', 'gql'];
+  }
+
+  getDestFilePath(relativePath) {
+    const newPath = super.getDestFilePath(relativePath);
+    if (!newPath || this.targetExtension) {
+      return newPath;
+    }
+
+    return `${newPath}.js`;
   }
 
   processString(source) {
@@ -22,10 +31,12 @@ module.exports = class GraphQLFilter extends Filter {
       let match = /^#import\s+(.*)/.exec(line);
       if (match && match[1]) {
         output.push(`import dep${i} from ${match[1]};`);
-        output.push(`doc.definitions = doc.definitions.concat(dep${i}.definitions);`);
+        output.push(
+          `doc.definitions = doc.definitions.concat(dep${i}.definitions);`
+        );
       }
     });
 
     return output.join('\n') + '\n';
   }
-}
+};

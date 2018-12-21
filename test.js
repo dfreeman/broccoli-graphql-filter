@@ -4,13 +4,13 @@ var assert = require('assert');
 var fs = require('fs');
 var rimraf = require('rimraf');
 
-after(function () {
+after(function() {
   rimraf.sync('test/temp/');
   rimraf.sync('tmp');
 });
 
 describe('File creation', function() {
-  it('should compile .graphql files', function () {
+  it('should compile .graphql files', function() {
     assert.equal(
       fs.readFileSync('test/expected/my-query.js', 'utf8'),
       fs.readFileSync('test/temp/my-query.js', 'utf8')
@@ -19,6 +19,18 @@ describe('File creation', function() {
     assert.equal(
       fs.readFileSync('test/expected/my-fragment.js', 'utf8'),
       fs.readFileSync('test/temp/my-fragment.js', 'utf8')
+    );
+  });
+
+  it('should compile .gql files', function() {
+    assert.equal(
+      fs.readFileSync('test/expected/my-query.js', 'utf8'),
+      fs.readFileSync('test/temp/other-query.js', 'utf8')
+    );
+
+    assert.equal(
+      fs.readFileSync('test/expected/my-fragment.js', 'utf8'),
+      fs.readFileSync('test/temp/other-fragment.js', 'utf8')
     );
   });
 });

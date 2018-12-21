@@ -8,7 +8,7 @@ gql.disableFragmentWarnings();
 module.exports = class GraphQLFilter extends Filter {
   constructor(inputNode, options) {
     super(inputNode, options);
-    this.extensions = ['graphql'];
+    this.extensions = ['graphql', 'gql'];
     this.targetExtension = 'js';
   }
 

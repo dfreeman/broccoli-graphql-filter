@@ -19,9 +19,13 @@
   ],
   "devDependencies": {
     "broccoli": "^2.0.1",
-    "mocha": "^5.2.0"
+    "broccoli-cli": "^1.0.0",
+    "broccoli-merge-trees": "^3.0.2",
+    "mocha": "^5.2.0",
+    "rimraf": "^2.6.2"
   },
   "scripts": {
+    "pretest": "broccoli build test/temp",
     "test": "mocha test.js"
   }
 }

@@ -6,9 +6,9 @@ const gql = require("graphql-tag");
 gql.disableFragmentWarnings();
 
 module.exports = class GraphQLFilter extends Filter {
-  constructor(inputNode, { keepExtension = false, ...options }) {
+  constructor(inputNode, options = {}) {
     super(inputNode, options);
-    this.targetExtension = keepExtension ? null : "js";
+    this.targetExtension = options.keepExtension ? null : "js";
     this.extensions = ["graphql", "gql"];
   }
 

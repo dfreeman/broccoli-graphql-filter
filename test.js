@@ -33,4 +33,16 @@ describe("File creation", function() {
       fs.readFileSync("test/temp/other-fragment.js", "utf8")
     );
   });
+
+  it("should compile .graphql files", function() {
+    assert.equal(
+      fs.readFileSync("test/expected/my-query.js", "utf8"),
+      fs.readFileSync("test/temp/my-query.graphql.js", "utf8")
+    );
+
+    assert.equal(
+      fs.readFileSync("test/expected/my-fragment.js", "utf8"),
+      fs.readFileSync("test/temp/my-fragment.graphql.js", "utf8")
+    );
+  });
 });

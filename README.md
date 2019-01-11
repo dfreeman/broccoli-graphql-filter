@@ -1,5 +1,3 @@
-
-
 # broccoli-graphql-filter
 
 [![Build Status](https://travis-ci.org/csantero/broccoli-graphql-filter.svg?branch=master)](https://travis-ci.org/csantero/broccoli-graphql-filter)
@@ -12,11 +10,18 @@ A [broccoli](https://github.com/joliss/broccoli) filter that converts graphql fi
 npm install --save broccoli-graphql-filter
 ```
 
+## Configuration
+
+- `keepExtension = false`, _optional_ – If `true`, creates files called
+  `my-query.graphql.js` instead of `my-query.js`, so that you can import the
+  files as `./my-query.graphql` instead of `./my-query`.
+
 ## Usage
 
 Given the following .graphql files:
 
 #### my-query.graphql
+
 ```graphql
 #import "./my-fragment.gql"
 
@@ -28,6 +33,7 @@ query myQuery {
 ```
 
 #### my-fragment.graphql
+
 ```graphql
 fragment MyFragment on Foo {
   hello
@@ -37,40 +43,41 @@ fragment MyFragment on Foo {
 the filter will output the following JS:
 
 #### my-query.js
+
 ```js
 const doc = {
-  "kind": "Document",
-  "definitions": [
+  kind: 'Document',
+  definitions: [
     {
-      "kind": "OperationDefinition",
-      "operation": "query",
-      "name": {
-        "kind": "Name",
-        "value": "myQuery"
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: {
+        kind: 'Name',
+        value: 'myQuery'
       },
-      "variableDefinitions": [],
-      "directives": [],
-      "selectionSet": {
-        "kind": "SelectionSet",
-        "selections": [
+      variableDefinitions: [],
+      directives: [],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
           {
-            "kind": "Field",
-            "name": {
-              "kind": "Name",
-              "value": "foo"
+            kind: 'Field',
+            name: {
+              kind: 'Name',
+              value: 'foo'
             },
-            "arguments": [],
-            "directives": [],
-            "selectionSet": {
-              "kind": "SelectionSet",
-              "selections": [
+            arguments: [],
+            directives: [],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
                 {
-                  "kind": "FragmentSpread",
-                  "name": {
-                    "kind": "Name",
-                    "value": "MyFragment"
+                  kind: 'FragmentSpread',
+                  name: {
+                    kind: 'Name',
+                    value: 'MyFragment'
                   },
-                  "directives": []
+                  directives: []
                 }
               ]
             }
@@ -79,58 +86,60 @@ const doc = {
       }
     }
   ],
-  "loc": {
-    "start": 0,
-    "end": 77
+  loc: {
+    start: 0,
+    end: 77
   }
 };
 export default doc;
-import dep0 from "./my-fragment.gql";
+import dep0 from './my-fragment.gql';
 doc.definitions = doc.definitions.concat(dep0.definitions);
 ```
 
 #### my-fragment.js
+
 ```js
 const doc = {
-  "kind": "Document",
-  "definitions": [
+  kind: 'Document',
+  definitions: [
     {
-      "kind": "FragmentDefinition",
-      "name": {
-        "kind": "Name",
-        "value": "MyFragment"
+      kind: 'FragmentDefinition',
+      name: {
+        kind: 'Name',
+        value: 'MyFragment'
       },
-      "typeCondition": {
-        "kind": "NamedType",
-        "name": {
-          "kind": "Name",
-          "value": "Foo"
+      typeCondition: {
+        kind: 'NamedType',
+        name: {
+          kind: 'Name',
+          value: 'Foo'
         }
       },
-      "directives": [],
-      "selectionSet": {
-        "kind": "SelectionSet",
-        "selections": [
+      directives: [],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
           {
-            "kind": "Field",
-            "name": {
-              "kind": "Name",
-              "value": "hello"
+            kind: 'Field',
+            name: {
+              kind: 'Name',
+              value: 'hello'
             },
-            "arguments": [],
-            "directives": []
+            arguments: [],
+            directives: []
           }
         ]
       }
     }
   ],
-  "loc": {
-    "start": 0,
-    "end": 39
+  loc: {
+    start: 0,
+    end: 39
   }
 };
 export default doc;
 ```
 
 ## Acknowledgements
+
 The filter code was extracted from https://github.com/bgentry/ember-apollo-client and was originally contributed by https://github.com/dfreeman.

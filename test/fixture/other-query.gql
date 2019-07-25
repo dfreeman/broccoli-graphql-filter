@@ -1,7 +1,0 @@
-#import "./my-fragment.gql"
-
-query myQuery {
-  foo {
-    ...MyFragment
-  }
-}

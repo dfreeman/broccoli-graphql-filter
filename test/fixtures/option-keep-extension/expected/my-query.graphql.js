@@ -6,7 +6,7 @@ const doc = {
       "operation": "query",
       "name": {
         "kind": "Name",
-        "value": "myQuery"
+        "value": "MyQuery"
       },
       "variableDefinitions": [],
       "directives": [],
@@ -41,9 +41,9 @@ const doc = {
   ],
   "loc": {
     "start": 0,
-    "end": 77
+    "end": 81
   }
 };
 export default doc;
-import dep0 from "./my-fragment.gql";
+import dep0 from "./my-fragment.graphql";
 doc.definitions = doc.definitions.concat(dep0.definitions);

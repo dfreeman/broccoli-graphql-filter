@@ -1,48 +1,45 @@
 "use strict";
 
-var assert = require("assert");
-var fs = require("fs");
-var rimraf = require("rimraf");
+const assert = require("assert");
+const fs = require("fs");
+const { Builder } = require("broccoli");
+const GraphQLFilter = require(".");
 
-after(function() {
-  rimraf.sync("test/temp/");
-  rimraf.sync("tmp");
-});
+const FIXTURES_DIR = `${__dirname}/test/fixtures`;
+const FIXTURES = fs.readdirSync(FIXTURES_DIR);
 
 describe("File creation", function() {
-  it("should compile .graphql files", function() {
-    assert.equal(
-      fs.readFileSync("test/expected/my-query.js", "utf8"),
-      fs.readFileSync("test/temp/my-query.js", "utf8")
-    );
+  for (let fixture of FIXTURES) {
+    describe(fixture, function() {
+      const cwd = `${FIXTURES_DIR}/${fixture}`;
+      const options = fs.existsSync(`${cwd}/options.json`)
+        ? require(`${cwd}/options.json`)
+        : {};
 
-    assert.equal(
-      fs.readFileSync("test/expected/my-fragment.js", "utf8"),
-      fs.readFileSync("test/temp/my-fragment.js", "utf8")
-    );
-  });
+      const builder = new Builder(new GraphQLFilter(`${cwd}/input`, options))
 
-  it("should compile .gql files", function() {
-    assert.equal(
-      fs.readFileSync("test/expected/my-query.js", "utf8"),
-      fs.readFileSync("test/temp/other-query.js", "utf8")
-    );
+      before(function() {
+        return builder.build();
+      });
 
-    assert.equal(
-      fs.readFileSync("test/expected/my-fragment.js", "utf8"),
-      fs.readFileSync("test/temp/other-fragment.js", "utf8")
-    );
-  });
+      after(function() {
+        return builder.cleanup();
+      });
 
-  it("should compile .graphql files", function() {
-    assert.equal(
-      fs.readFileSync("test/expected/my-query.js", "utf8"),
-      fs.readFileSync("test/temp/my-query.graphql.js", "utf8")
-    );
+      it("compiles files correctly", function() {
+        let actualFiles = fs.readdirSync(builder.outputPath).sort();
+        let expectedFiles = fs.readdirSync(`${cwd}/expected`).sort();
 
-    assert.equal(
-      fs.readFileSync("test/expected/my-fragment.js", "utf8"),
-      fs.readFileSync("test/temp/my-fragment.graphql.js", "utf8")
-    );
-  });
+        assert.deepEqual(actualFiles, expectedFiles);
+
+        for (let file of expectedFiles) {
+          assert.equal(
+            fs.readFileSync(`${builder.outputPath}/${file}`, "utf-8"),
+            fs.readFileSync(`${cwd}/expected/${file}`, "utf-8"),
+            `${file} was transpiled correctly`
+          );
+        }
+      });
+    });
+  }
 });

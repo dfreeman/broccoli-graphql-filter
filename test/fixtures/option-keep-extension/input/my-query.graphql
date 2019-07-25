@@ -1,4 +1,4 @@
-#import "./my-fragment.graphql"
+# import * from "./my-fragment.graphql"
 
 query MyQuery {
   foo {

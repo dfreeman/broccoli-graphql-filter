@@ -1,0 +1,11 @@
+fragment FragmentA on Foo {
+  hello
+}
+
+fragment FragmentB on Foo {
+  goodbye
+}
+
+fragment FragmentC on Foo {
+  what
+}

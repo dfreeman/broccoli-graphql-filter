@@ -28,7 +28,15 @@ const doc = {
                   "kind": "FragmentSpread",
                   "name": {
                     "kind": "Name",
-                    "value": "MyFragment"
+                    "value": "FragmentA"
+                  },
+                  "directives": []
+                },
+                {
+                  "kind": "FragmentSpread",
+                  "name": {
+                    "kind": "Name",
+                    "value": "FragmentC"
                   },
                   "directives": []
                 }
@@ -41,9 +49,9 @@ const doc = {
   ],
   "loc": {
     "start": 0,
-    "end": 81
+    "end": 114
   }
 };
 export default doc;
-import dep0 from "./my-fragment";
-doc.definitions = doc.definitions.concat(dep0.definitions);
+import dep0 from "./fragments";
+doc.definitions = doc.definitions.concat(dep0.definitions.filter(def => /^(FragmentA|FragmentC)$/.test(def.name.value)));

@@ -2,6 +2,7 @@
 
 const Filter = require("broccoli-persistent-filter");
 const gql = require("graphql-tag");
+const extractImports = require("./lib/extract-imports");
 
 gql.disableFragmentWarnings();
 
@@ -27,14 +28,15 @@ module.exports = class GraphQLFilter extends Filter {
       `export default doc;`
     ];
 
-    source.split("\n").forEach((line, i) => {
-      let match = /^#import\s+(.*)/.exec(line);
-      if (match && match[1]) {
-        output.push(`import dep${i} from ${match[1]};`);
-        output.push(
-          `doc.definitions = doc.definitions.concat(dep${i}.definitions);`
-        );
+    extractImports(source).forEach((directive, i) => {
+      let definitions = `dep${i}.definitions`;
+      if (directive.bindings) {
+        let matcher = `/^(${directive.bindings.join("|")})$/`;
+        definitions = `${definitions}.filter(def => ${matcher}.test(def.name.value))`;
       }
+
+      output.push(`import dep${i} from ${directive.source};`);
+      output.push(`doc.definitions = doc.definitions.concat(${definitions});`);
     });
 
     return output.join("\n") + "\n";

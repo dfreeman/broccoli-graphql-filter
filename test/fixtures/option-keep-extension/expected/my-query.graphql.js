@@ -41,7 +41,7 @@ const doc = {
   ],
   "loc": {
     "start": 0,
-    "end": 81
+    "end": 89
   }
 };
 export default doc;

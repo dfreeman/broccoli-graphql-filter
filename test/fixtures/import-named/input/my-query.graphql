@@ -1,0 +1,8 @@
+# import FragmentA, FragmentC from "./fragments"
+
+query MyQuery {
+  foo {
+    ...FragmentA
+    ...FragmentC
+  }
+}

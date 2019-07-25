@@ -2,13 +2,16 @@
 
 const assert = require("assert");
 const fs = require("fs");
+const { stripIndent } = require("common-tags");
 const { Builder } = require("broccoli");
+
 const GraphQLFilter = require(".");
+const extractImports = require("./lib/extract-imports");
 
 const FIXTURES_DIR = `${__dirname}/test/fixtures`;
 const FIXTURES = fs.readdirSync(FIXTURES_DIR);
 
-describe("File creation", function() {
+describe("Acceptance | File creation", function() {
   for (let fixture of FIXTURES) {
     describe(fixture, function() {
       const cwd = `${FIXTURES_DIR}/${fixture}`;
@@ -42,4 +45,70 @@ describe("File creation", function() {
       });
     });
   }
+});
+
+describe("Unit | extractImports", function() {
+  it("extracts * imports", function() {
+    let source = stripIndent`
+      # import * from "./foo"
+    `;
+
+    assert.deepEqual(extractImports(source), [
+      { source: `"./foo"` }
+    ]);
+  });
+
+  it("extracts named imports", function() {
+    let source = stripIndent`
+      # import Foo, Bar from "./baz"
+    `;
+
+    assert.deepEqual(extractImports(source), [
+      { source: `"./baz"`, bindings: ["Foo", "Bar"] }
+    ]);
+  });
+
+  it("extracts legacy-format imports", function() {
+    let source = stripIndent`
+      #import "./foo"
+    `;
+
+    assert.deepEqual(extractImports(source), [
+      { source: `"./foo"` }
+    ]);
+  });
+
+  it("extracts all imports", function() {
+    let source = stripIndent`
+      # import * from "./foo"
+      # import Bar from "baz"
+    `;
+
+    assert.deepEqual(extractImports(source), [
+      { source: `"./foo"` },
+      { source: `"baz"`, bindings: ["Bar"] }
+    ]);
+  });
+
+  it("rejects invalid import specifiers", function() {
+    let source = stripIndent`
+      # import Foo, * from "./foo"
+    `;
+
+    assert.throws(
+      () => extractImports(source),
+      new Error("A '*' import must be the only binding")
+    );
+  });
+
+  it("rejects invalid identifiers", function() {
+    let source = stripIndent`
+      # import foo-bar from "./foo"
+    `;
+
+    assert.throws(
+      () => extractImports(source),
+      new Error("Invalid import identifier: foo-bar")
+    );
+  });
 });

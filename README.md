@@ -23,7 +23,7 @@ Given the following .graphql files:
 #### my-query.graphql
 
 ```graphql
-#import "./my-fragment.gql"
+# import * from "./my-fragment.gql"
 
 query myQuery {
   foo {
@@ -139,6 +139,30 @@ const doc = {
 };
 export default doc;
 ```
+
+### Import Syntax
+
+Imports of fragments from other locations are specified using comments in a format compatible with a subset of [`graphql-import`](https://oss.prisma.io/content/graphql-import/overview).
+
+To bring all identifiers in a specific module into scope, you can use `*`:
+
+```graphql
+# import * from 'path/to/module'
+```
+
+To only import specific identifiers, you can write them out separated by commas:
+
+```graphql
+# import Foo from 'path/to/foo'
+# import Bar, Baz from 'path/to/bar-baz'
+```
+
+#### Migrating Import Syntax
+
+Up to `v0.3.2`, `broccoli-graphql-filter` used a coarser-grained import syntax.
+In order to align with the broader ecosystem and enable better static analysis opportunities, we've moved to a subset of [`graphql-import`](https://oss.prisma.io/content/graphql-import/overview)'s syntax.
+
+To keep the semantics of your existing imports while migrating to the new syntax, you can perform project-wide find/replace, replacing all instances of `#import` in your project's GraphQL documents with `# import * from`.
 
 ## Acknowledgements
 

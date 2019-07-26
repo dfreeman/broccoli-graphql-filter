@@ -1,4 +1,4 @@
-# import * from "./my-fragment"
+#import "./my-fragment"
 
 query MyQuery {
   foo {

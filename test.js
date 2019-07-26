@@ -53,7 +53,7 @@ describe("Unit | extractImports", function() {
       # import * from "./foo"
     `;
 
-    assert.deepEqual(extractImports(source), [
+    assert.deepEqual(extractImports(source, 'test.gql'), [
       { source: `"./foo"` }
     ]);
   });
@@ -63,7 +63,7 @@ describe("Unit | extractImports", function() {
       # import Foo, Bar from "./baz"
     `;
 
-    assert.deepEqual(extractImports(source), [
+    assert.deepEqual(extractImports(source, 'test.gql'), [
       { source: `"./baz"`, bindings: ["Foo", "Bar"] }
     ]);
   });
@@ -73,7 +73,7 @@ describe("Unit | extractImports", function() {
       #import "./foo"
     `;
 
-    assert.deepEqual(extractImports(source), [
+    assert.deepEqual(extractImports(source, 'test.gql'), [
       { source: `"./foo"` }
     ]);
   });
@@ -84,7 +84,7 @@ describe("Unit | extractImports", function() {
       # import Bar from "baz"
     `;
 
-    assert.deepEqual(extractImports(source), [
+    assert.deepEqual(extractImports(source, 'test.gql'), [
       { source: `"./foo"` },
       { source: `"baz"`, bindings: ["Bar"] }
     ]);
@@ -96,7 +96,7 @@ describe("Unit | extractImports", function() {
     `;
 
     assert.throws(
-      () => extractImports(source),
+      () => extractImports(source, 'test.gql'),
       new Error("A '*' import must be the only binding")
     );
   });
@@ -107,7 +107,7 @@ describe("Unit | extractImports", function() {
     `;
 
     assert.throws(
-      () => extractImports(source),
+      () => extractImports(source, 'test.gql'),
       new Error("Invalid import identifier: foo-bar")
     );
   });

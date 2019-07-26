@@ -157,6 +157,13 @@ To only import specific identifiers, you can write them out separated by commas:
 # import Bar, Baz from 'path/to/bar-baz'
 ```
 
+#### Migrating Import Syntax
+
+Up to `v0.3.2`, `broccoli-graphql-filter` used a coarser-grained import syntax.
+In order to align with the broader ecosystem and enable better static analysis opportunities, we've moved to a subset of [`graphql-import`](https://oss.prisma.io/content/graphql-import/overview)'s syntax.
+
+To keep the semantics of your existing imports while migrating to the new syntax, you can perform project-wide find/replace, replacing all instances of `#import` in your project's GraphQL documents with `# import * from`.
+
 ## Acknowledgements
 
 The filter code was extracted from https://github.com/bgentry/ember-apollo-client and was originally contributed by https://github.com/dfreeman.

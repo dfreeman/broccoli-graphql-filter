@@ -22,13 +22,13 @@ module.exports = class GraphQLFilter extends Filter {
     return `${newPath}.js`;
   }
 
-  processString(source) {
+  processString(source, relativePath) {
     let output = [
       `const doc = ${JSON.stringify(gql([source]), null, 2)};`,
       `export default doc;`
     ];
 
-    extractImports(source).forEach((directive, i) => {
+    extractImports(source, relativePath).forEach((directive, i) => {
       let definitions = `dep${i}.definitions`;
       if (directive.bindings) {
         let matcher = `/^(${directive.bindings.join("|")})$/`;

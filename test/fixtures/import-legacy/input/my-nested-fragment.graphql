@@ -1,0 +1,5 @@
+#import "./my-fragment"
+
+fragment MyNestedFragment on Foo {
+    ...MyFragment
+}

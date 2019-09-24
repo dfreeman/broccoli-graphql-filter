@@ -1,0 +1,10 @@
+#import "./my-nested-fragment"
+#import "./my-fragment"
+
+query MyQuery {
+  ...MyFragment
+
+  foo {
+    ...MyNestedFragment
+  }
+}

@@ -13,8 +13,8 @@ module.exports = class GraphQLFilter extends Filter {
     this.extensions = ["graphql", "gql"];
   }
 
-  getDestFilePath(relativePath) {
-    const newPath = super.getDestFilePath(relativePath);
+  getDestFilePath(relativePath, entry) {
+    const newPath = super.getDestFilePath(relativePath, entry);
     if (!newPath || this.targetExtension) {
       return newPath;
     }

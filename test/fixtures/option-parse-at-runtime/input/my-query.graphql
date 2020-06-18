@@ -1,0 +1,7 @@
+# import * from "./my-fragment.graphql"
+
+query MyQuery {
+  foo {
+    ...MyFragment
+  }
+}

@@ -10,7 +10,12 @@ module.exports = class GraphQLFilter extends Filter {
   constructor(inputNode, options = {}) {
     super(inputNode, options);
     this.targetExtension = options.keepExtension ? null : "js";
+    this.parseAt = options.parseAt || "build-time";
     this.extensions = ["graphql", "gql"];
+
+    if (!["build-time", "run-time"].includes(this.parseAt)) {
+      console.warn("[broccoli-graphql-filter] Invalid `parseAt` option: expected `build-time` or `run-time`");
+    }
   }
 
   getDestFilePath(relativePath, entry) {
@@ -23,10 +28,9 @@ module.exports = class GraphQLFilter extends Filter {
   }
 
   processString(source, relativePath) {
-    let output = [
-      `const doc = ${JSON.stringify(gql([source]), null, 2)};`,
-      `export default doc;`
-    ];
+    let output = this.serializeDocumentDeclaration(source);
+
+    output.push('export default doc;');
 
     extractImports(source, relativePath).forEach((directive, i) => {
       let definitions = `dep${i}.definitions`;
@@ -40,5 +44,18 @@ module.exports = class GraphQLFilter extends Filter {
     });
 
     return output.join("\n") + "\n";
+  }
+
+  serializeDocumentDeclaration(source) {
+    if (this.parseAt === "run-time") {
+      return [
+        `import gql from 'graphql-tag';`,
+        `const doc = gql\`${source.replace(/[`\\]/g, '\\$&')}\`;`,
+      ];
+    } else {
+      return [
+        `const doc = ${JSON.stringify(gql([source]), null, 2)};`,
+      ];
+    }
   }
 };

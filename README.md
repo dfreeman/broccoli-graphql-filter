@@ -16,6 +16,14 @@ npm install --save broccoli-graphql-filter
   `my-query.graphql.js` instead of `my-query.js`, so that you can import the
   files as `./my-query.graphql` instead of `./my-query`.
 
+- `parseAt = 'build-time'`, _optional_ - Determines when documents are parsed.
+  If set to `'run-time'`, GraphQL documents will be included as tagged template
+  strings using `graphql-tag`. If left blank or set to `'build-time'`, documents
+  will be included in their parsed JSON format, which is typically larger than
+  the source document text, but doesn't require additional work at runtime to parse.
+  Note that `'run-time'` requires that the `graphql-tag` package is available to
+  import in your application.
+
 ## Usage
 
 Given the following .graphql files:

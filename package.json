@@ -9,7 +9,7 @@
   "dependencies": {
     "broccoli-persistent-filter": "^3.1.0",
     "graphql": "^15.3.0",
-    "graphql-tag": "^2.10.0"
+    "graphql-tag": "^2.10.4"
   },
   "keywords": [
     "broccoli-plugin",

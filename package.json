@@ -18,7 +18,7 @@
     "compile"
   ],
   "devDependencies": {
-    "broccoli": "^2.0.1",
+    "broccoli": "^3.4.2",
     "common-tags": "^1.8.0",
     "mocha": "^5.2.0"
   },

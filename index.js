@@ -19,7 +19,14 @@ module.exports = class GraphQLFilter extends Filter {
   }
 
   getDestFilePath(relativePath, entry) {
-    const newPath = super.getDestFilePath(relativePath, entry);
+    let newPath;
+    try {
+      newPath = super.getDestFilePath(relativePath, entry);
+    } catch (e) {
+      if (e.code !== 'ENOENT') {
+        throw e;
+      }
+    }
     if (!newPath || this.targetExtension) {
       return newPath;
     }

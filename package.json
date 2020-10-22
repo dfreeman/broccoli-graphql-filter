@@ -6,10 +6,6 @@
   "author": "Chris Santero <chris@simply360.org>",
   "repository": "https://github.com/csantero/broccoli-graphql-filter",
   "license": "MIT",
-  "dependencies": {
-    "broccoli-persistent-filter": "^2.1.1",
-    "graphql-tag": "^2.10.0"
-  },
   "keywords": [
     "broccoli-plugin",
     "graphql",
@@ -18,6 +14,10 @@
   ],
   "engines": {
     "node": "10.* || >= 12.*"
+  },
+  "dependencies": {
+    "broccoli-persistent-filter": "^3.1.1",
+    "graphql-tag": "^2.10.0"
   },
   "devDependencies": {
     "broccoli": "^2.0.1",

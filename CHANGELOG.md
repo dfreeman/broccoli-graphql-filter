@@ -1,4 +1,4 @@
-## 0.6.0 (Unreleased)
+## 1.0.0 (October 22, 2020)
 ### Breaking
  - Set explicit `engines` field in `package.json` (Node 10 and 12+ are supported)
 

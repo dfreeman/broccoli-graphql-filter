@@ -2,20 +2,27 @@
 
 const Filter = require("broccoli-persistent-filter");
 const gql = require("graphql-tag");
+const hash = require("object-hash");
 const extractImports = require("./lib/extract-imports");
 
 gql.disableFragmentWarnings();
 
 module.exports = class GraphQLFilter extends Filter {
   constructor(inputNode, options = {}) {
-    super(inputNode, options);
+    super(inputNode, { persist: true, ...options });
+
     this.targetExtension = options.keepExtension ? null : "js";
     this.parseAt = options.parseAt || "build-time";
     this.extensions = ["graphql", "gql"];
+    this.optionsHash = hash(options);
 
     if (!["build-time", "run-time"].includes(this.parseAt)) {
       console.warn("[broccoli-graphql-filter] Invalid `parseAt` option: expected `build-time` or `run-time`");
     }
+  }
+
+  baseDir() {
+    return __dirname;
   }
 
   getDestFilePath(relativePath, entry) {
@@ -25,6 +32,10 @@ module.exports = class GraphQLFilter extends Filter {
     }
 
     return `${newPath}.js`;
+  }
+
+  cacheKeyProcessString(content, relativePath) {
+    return `${super.cacheKeyProcessString(content, relativePath)}${this.optionsHash}`;
   }
 
   processString(source, relativePath) {

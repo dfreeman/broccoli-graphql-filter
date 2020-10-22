@@ -16,6 +16,9 @@
     "preprocessor",
     "compile"
   ],
+  "engines": {
+    "node": "10.* || >= 12.*"
+  },
   "devDependencies": {
     "broccoli": "^2.0.1",
     "common-tags": "^1.8.0",

@@ -16,14 +16,14 @@
     "node": "10.* || >= 12.*"
   },
   "dependencies": {
-    "broccoli-persistent-filter": "^3.1.1",
-    "graphql-tag": "^2.10.0",
-    "object-hash": "^2.0.3"
+    "broccoli-persistent-filter": "^3.1.2",
+    "graphql-tag": "^2.11.0",
+    "object-hash": "^2.1.1"
   },
   "devDependencies": {
     "broccoli": "^2.0.1",
     "common-tags": "^1.8.0",
-    "graphql": "^14.0.2",
+    "graphql": "^15.5.0",
     "mocha": "^5.2.0"
   },
   "peerDependencies": {

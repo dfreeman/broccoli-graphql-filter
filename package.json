@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "broccoli-persistent-filter": "^3.1.1",
-    "graphql-tag": "^2.10.0",
+    "graphql-tag": "^2.12.6",
     "object-hash": "^2.0.3"
   },
   "devDependencies": {
@@ -27,7 +27,7 @@
     "mocha": "^5.2.0"
   },
   "peerDependencies": {
-    "graphql": "^14 || ^15"
+    "graphql": "^14 || ^15 || ^16"
   },
   "scripts": {
     "test": "mocha test.js"
